@@ -1,0 +1,16 @@
+<html><head>
+  <link rel="stylesheet"
+   href="{{ url_for('static', filename='style.css') }}">
+</head><body>
+  <h1>
+      {% block title %}
+      {{ msg }}
+      {% endblock %}
+  </h1>
+  <div>
+    {% block contents %}
+    <a href="/">⇨トップページへ</a>
+    {% endblock %}
+  </div>
+</body></html>
+

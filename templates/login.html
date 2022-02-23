@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ログインフォーム
+{% endblock %}
+
+{% block contents %}
+<form action="/try_login" method="POST">
+  ユーザー名: <br/>
+  <input type="text" name="user"><br>
+  パスワード: <br/>
+  <input type="password" name="pw"><br>
+  <input type="submit" value="ログイン">
+</form>
+<p><a href="/myroom">→マイルーム</a></p>
+{% endblock %}
+
+

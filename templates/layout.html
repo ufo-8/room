@@ -1,0 +1,16 @@
+<html><head>
+  <link rel="stylesheet"
+   href="{{ url_for('static', filename='style.css') }}">
+</head><body>
+  <h1>
+      {% block title %}
+      <!-- ここにタイトルを表示 -->
+      {% endblock %}
+  </h1>
+  <div>
+    {% block contents %}
+    <!-- ここにコンテンツを表示 -->
+    {% endblock %}
+  </div>
+</body></html>
+

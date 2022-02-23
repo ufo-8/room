@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{ user }}の部屋
+{% endblock %}
+
+{% block contents %}
+  <div>
+    <h2>リビング</h2>
+    <p>
+      <a href="myroom.html">部屋全体を見る</a>
+    </p>
+  </div>
+  <div>
+   <img src="./static/living.png" alt="リビングの画像" title="リビング">
+  </div>
+  <div>
+    <h3>家具・家電チェックリスト</h3>
+    <input type="checkbox" name=“sample” value="テレビ">テレビ
+    <input type="checkbox" name=“sample” value="ベッド">ベッド
+    <input type="checkbox" name=“sample” value="ソファ">ソファ
+  </div>
+{% endblock %}
+
+</body></html>
+
