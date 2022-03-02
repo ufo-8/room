@@ -1,12 +1,16 @@
 from flask import session, redirect
 import sqlite3
-#ログインに使うユーザ名とパスワード
+
+#ログインに使うユーザ名とパスワード（これを使うとエラーが出ない）
 #USERLIST = {
 #    'taro': 'aaa',
 #    'jiro': 'bbb',
 #    'sabu': 'ccc',
 #}
 
+#↓ここからSQLを試しているコード
+
+# sqlite3を用いてUSERLISTを取得
 dbname = 'ROOM.db'
 conn = sqlite3.connect(dbname)
 cur = conn.cursor()
@@ -19,7 +23,6 @@ def dict_factory(cursor, row):
        d[col[0]] = row[idx]
    return d
 
-
 # row_factoryの変更(dict_factoryに変更)
 conn.row_factory = dict_factory
 
@@ -28,9 +31,13 @@ cur.execute('SELECT * FROM userlist')
 
        
 conn.row_factory = dict_factory
-# レコードを1行取得
+# レコードを取得
 USERLIST = cur.fetchall()
 
+cur.close()
+conn.close()
+
+#↑ここまでSQLを試しているコード
 
 #ログインしているか調べる
 def is_login():
@@ -55,6 +62,3 @@ def try_logout():
 def get_user():
     if is_login(): return session['login']
     return 'not login'
-
-cur.close()
-conn.close()
