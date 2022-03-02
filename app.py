@@ -46,5 +46,9 @@ def show_msg(msg):
 def living_room():
     return render_template('living.html', user=user)
 
+@app.route('/write')
+def write():
+    return render_template('write.html', user=user)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
