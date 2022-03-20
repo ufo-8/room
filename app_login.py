@@ -1,36 +1,14 @@
 from flask import session, redirect
 import sqlite3
 
-#ログインに使うユーザ名とパスワード（これを使うとエラーが出ない）
-#USERLIST = {
-#    'taro': 'aaa',
-#    'jiro': 'bbb',
-#    'sabu': 'ccc',
-#}
 
-#↓ここからSQLを試しているコード
-
-# sqlite3を用いてUSERLISTを取得
 dbname = 'ROOM.db'
 conn = sqlite3.connect(dbname)
 cur = conn.cursor()
 
-# 参考:https://qiita.com/wiwi7373/items/7d47decf85a77454074d
-# dict_factoryの定義
-def dict_factory(cursor, row):
-   d = {}
-   for idx, col in enumerate(cursor.description):
-       d[col[0]] = row[idx]
-   return d
-
-# row_factoryの変更(dict_factoryに変更)
-conn.row_factory = dict_factory
-
 # SELECT文の発行
 cur.execute('SELECT * FROM userlist')
 
-       
-conn.row_factory = dict_factory
 # レコードを取得
 USERLIST = cur.fetchall()
 
@@ -38,7 +16,6 @@ cur.close()
 conn.close()
 
 #↑ここまでSQLを試しているコード
-
 #ログインしているか調べる
 def is_login():
     return 'login' in session
@@ -46,12 +23,11 @@ def is_login():
 #ログイン処理
 def try_login(user, password):
     #該当ユーザーがいるか？
-    if user not in USERLIST: return False
-    #パスワードが合っているか？
-    if USERLIST[user] != password: return False
-    #ログイン処理
-    session['login'] = user
-    return True
+    for i in range(0, len(USERLIST)):
+        if user == USERLIST[i][1]:
+            if password == USERLIST[i][2]:
+                session['login'] = user
+                return True
 
 #ログアウトする
 def try_logout():
